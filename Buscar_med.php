@@ -14,7 +14,7 @@ getTwitters('tweet', {
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Buscar médico</title>
+<title>Buscar mï¿½dico</title>
 <style type="text/css">
 <!--
 .style7 {font-size: 14px}
@@ -77,8 +77,8 @@ require("script/header_links.html");
 	require("script/conexion.php");
 	
 	$q = 'select * from especialidades order by Especialidad';
-	$result = mysql_query($q,$db)
-	or die("<br>Falló el query:<br><pre> $q </pre><br>Error:". mysql_error());
+	$result = mysql_query($q,$connection)
+	or die("<br>Fallï¿½ el query:<br><pre> $q </pre><br>Error:". mysql_error());
     ?>
 <select name="cmbEspecialidad" id="cmbEspecialidad" onchange="IngresarOtro(this)">  
 	<option value="">Todos</option>
