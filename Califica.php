@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Califica Médico</title>
+<title>Califica Mï¿½dico</title>
 
 <link rel="stylesheet" type="text/css" href="css/formato.css" />
 <script type='text/javascript'  src='script/livevalidation_standalone.js'> </script>
@@ -27,17 +27,17 @@
 	
 	$q = " select * from usuarios where id_usuario = $id_medico ";
 	
-	$result = mysql_query($q,$db) 
-	or die("<br>Falló el query:<br><pre> $q </pre><br>Error:". mysql_error());
+	$result = mysqli_query($connection,$q) 
+	or die("<br>Fallï¿½ el query:<br><pre> $q </pre><br>Error:". mysqli_error());
 
-	$num_rows = mysql_num_rows($result);
-	$myrow = mysql_fetch_array($result);
+	$num_rows = mysqli_num_rows($result);
+	$myrow = mysqli_fetch_array($result);
 
 	if (!empty($myrow)) 
 	{
 ?>
 <br><br>
-Cuestionario para evaluar al médico: <strong><font size="+2"><?php echo $myrow["Nombre"]." ".$myrow["Ap_Paterno"]." ".$myrow["Ap_Materno"] ?></font> </strong><br><br>
+Cuestionario para evaluar al mï¿½dico: <strong><font size="+2"><?php echo $myrow["Nombre"]." ".$myrow["Ap_Paterno"]." ".$myrow["Ap_Materno"] ?></font> </strong><br><br>
 <form id="form1" name="form1" method="post" action="valida.php">
 <table width="52%" height="397" border="0">
   <tr>

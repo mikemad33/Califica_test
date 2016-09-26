@@ -18,7 +18,7 @@ $hd_name = $_POST['hd_name'];
     $db = "c9";                                  //Your database name you want to connect to
     $port = 3306;                                //The port #. It is always 3306
     
-    connection = mysqli_connect($host, $user, $pass, $db, $port)or die(mysql_error());
+    $connection = mysqli_connect($host, $user, $pass, $db, $port)or die(mysql_error());
 
 //echo "Valor de campo: ".$hd_name ."<br>";
 

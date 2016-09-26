@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Registro de médicos</title>
+<title>Registro de mï¿½dicos</title>
 <style type="text/css">
 <!--
 .style6 {font-size: 13px}
@@ -82,18 +82,18 @@ function IngresarOtro(obj) {
 	require("script/conexion.php");
 	
 	$q = 'select * from especialidades order by Especialidad';
-	$result = mysql_query($q,$db)
-	or die("<br>Falló el query:<br><pre> $q </pre><br>Error:". mysql_error());
+	$result = mysqli_query($connection,$q)
+	or die("<br>Fallï¿½ el query:<br><pre> $q </pre><br>Error:". mysqli_error());
     ?>
     
 <select name="cmbEspecialidad" id="cmbEspecialidad" onchange="IngresarOtro(this)">  
 	
 	<?php 
-	if ($row = mysql_fetch_array($result)){ 
+	if ($row = mysqli_fetch_array($result)){ 
 		do { 
 				echo '<option value= "'.$row["id_Especialidad"].'">'.$row["Especialidad"].'</option>';
 			} 
-		while ($row = mysql_fetch_array($result)); 
+		while ($row = mysqli_fetch_array($result)); 
 	}
 	?>
     	<!--script language="javascript">

@@ -77,18 +77,18 @@ require("script/header_links.html");
 	require("script/conexion.php");
 	
 	$q = 'select * from especialidades order by Especialidad';
-	$result = mysql_query($q,$connection)
+	$result = mysqli_query($connection,$q)
 	or die("<br>Fall� el query:<br><pre> $q </pre><br>Error:". mysql_error());
     ?>
 <select name="cmbEspecialidad" id="cmbEspecialidad" onchange="IngresarOtro(this)">  
 	<option value="">Todos</option>
 	<?php 
-	if ($row = mysql_fetch_array($result)){ 
+	if ($row = mysqli_fetch_array($result)){ 
 	
 		do { 
 				echo '<option value= "'.$row["id_Especialidad"].'">'.$row["Especialidad"].'</option>';
 			} 
-		while ($row = mysql_fetch_array($result)); 
+		while ($row = mysqli_fetch_array($result)); 
 	}
 	?>
     

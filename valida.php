@@ -4,8 +4,8 @@
 //if (!isset($_POST['submit'])) 
 //{
 /* //Se conecta a la BD
-$db = mysql_connect("localhost", "root", "gre081");
-mysql_select_db("medicos2",$db) or die ('No se pudo conectar a la BD');
+$db = mysqli_connect("localhost", "root", "gre081");
+mysqli_select_db($db,"medicos2") or die ('No se pudo conectar a la BD');
 $hd_name = $_POST['hd_name'];
 
 echo "Valor de campo: ".$hd_name ."<br>";
@@ -22,11 +22,11 @@ Case "Login":
 
 	$q="SELECT Nombre FROM Usuarios where login = '$login' and Pwd = '$pwd'";
 
-	$result = mysql_query($q,$db) 
-	or die("<br>Fall&oacute; el query:<br><pre> $q </pre><br>Error:". mysql_error());
+	$result = mysqli_query($connection,$q)
+	or die("<br>Fall&oacute; el query:<br><pre> $q </pre><br>Error:". mysqli_error());
 
-	$num_rows = mysql_num_rows($result);
-	if ($myrow = mysql_fetch_array($result)) 
+	$num_rows = mysqli_num_rows($result);
+	if ($myrow = mysqli_fetch_array($result)) 
 	{
 		echo "<br>Bienvenido ".$myrow["Nombre"]."!!!";
 		
@@ -35,10 +35,10 @@ Case "Login":
 	echo "<br>El registro no se pudo leer";
 	} 
 
-	$result = mysql_query( $q, $db ) or die("Falla al buscar en la BD:<br><pre>$q</pre><br>Error: " . mysql_error());
+	$result = mysqli_query( $db, $q) or die("Falla al buscar en la BD:<br><pre>$q</pre><br>Error: " . mysqli_error());
 	
-	//mysql_free_result($q);
-//mysql_close($db);
+	//mysqli_free_result($q);
+//mysqli_close($db);
 
 	break; //Termina "Ingresa"
 
@@ -74,8 +74,8 @@ Case "Registro":
 	values ( '$Login', '$Pwd', '$Nombre', '$ApPaterno', '$ApMaterno', '$Direccion', '$Colonia', 
 	'$Delegacion', '$CP', '$Tel', '$Ciudad', '$Estado', '$Correo', '$Tipo_usuario', '$Sexo')";
 	
-	$result = mysql_query($q,$db)
-	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysql_error());
+	$result = mysqli_query($connection,$q)
+	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysqli_error());
 	//echo $q;	
 	//echo "<br>$Tipo_usuario";
 	if ($Tipo_usuario == "1")
@@ -128,25 +128,25 @@ case "Medico_registro":
 		values (null,'$Otra_esp')";
 		
 		//echo "<br><br>".$q;
-		$result = mysql_query($q,$db)
-		or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysql_error());
+		$result = mysqli_query($connection,$q)
+		or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysqli_error());
 			
 		$q = "select * from Especialidades where Especialidad = '$Otra_esp'";
 		
-		$result = mysql_query($q,$db)
-		or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysql_error());
+		$result = mysqli_query($connection,$q)
+		or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysqli_error());
 		
-		$row = mysql_fetch_array($result);
+		$row = mysqli_fetch_array($result);
 		$Esp = $row["id_Especialidad"];		
 	}
 	
 	
 	//Identifica el id_usuario que le corresponde al m&eacute;dico
 	$q="select max(id_usuario) as Maximo from usuarios";
-	$result = mysql_query($q,$db)
-	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysql_error());
+	$result = mysqli_query($connection,$q)
+	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysqli_error());
 		
-	$row = mysql_fetch_array($result);
+	$row = mysqli_fetch_array($result);
 	$ultimo = $row["Maximo"];
 	//echo "<br>El valor es: " .$row["maximo"];
 	
@@ -158,15 +158,15 @@ case "Medico_registro":
 	'$EgresaSubEsp', '$Hospital', '$CalleCons', '$ColoniaCons', '$DelegacionCons', '$CPCons', 
 	'$TelCons1', '$TelCons2', '$CiudadCons', '$EstadoCons')";
 	
-	$result = mysql_query($q,$db)
-	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysql_error());
+	$result = mysqli_query($connection,$q)
+	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysqli_error());
 	//echo "<br>". $q;
 
 	$q="select Nombre, Ap_Paterno, Ap_Materno, Sexo from usuarios where id_usuario = $ultimo";
-	$result = mysql_query($q,$db)
-	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysql_error());
+	$result = mysqli_query($connection,$q)
+	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysqli_error());
 	
-	$row = mysql_fetch_array($result);
+	$row = mysqli_fetch_array($result);
 	$Nombre = $row["Nombre"];
 	$Nombre = $row["Nombre"];
 	$Ap_Paterno = $row["Ap_Paterno"];
@@ -251,12 +251,12 @@ case "Buscar":
 	
 	//echo "<br>$q";
 	
-	$result = mysql_query($q,$db) 
-	or die("<br>Fall&oacute; el query buscar:<br><pre> $q </pre><br>Error:". mysql_error());	
+	$result = mysqli_query($connection,$q) 
+	or die("<br>Fall&oacute; el query buscar:<br><pre> $q </pre><br>Error:". mysqli_error());	
 	
-	$num_rows = mysql_num_rows($result);	
+	$num_rows = mysqli_num_rows($result);	
 
-	if ($myrow = mysql_fetch_array($result)) 
+	if ($myrow = mysqli_fetch_array($result)) 
 	{
 		echo "<br><br>Se encontraron <b>".$num_rows."</b> registros con los criterios seleccionados<BR><br>";
 		echo "<form id='form1' method='Post' action='Califica.php'>";
@@ -312,7 +312,7 @@ case "Buscar":
 				<br>".$myrow["Tel_cons2"]."</td>
 						
 			</tr>\n";
-			} while ($myrow = mysql_fetch_array($result));
+			} while ($myrow = mysqli_fetch_array($result));
 		echo "<table width='200' border='0'>
         <tr>
 		  <td></td>
@@ -355,17 +355,17 @@ Case "Calificar":
 	
 	//echo "<br>Query: ".$q;
 	
-	$result = mysql_query($q,$db)
-	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysql_error());
+	$result = mysqli_query($connection,$q)
+	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysqli_error());
 
 
 	//Obtiene el nombre del usuario evaluado
 	$q = "select * from usuarios where id_usuario = '$hd_idMedico' ";
 	
-	$result = mysql_query($q,$db)
-	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysql_error());
+	$result = mysqli_query($connection,$q)
+	or die("<br>Fall&oacute el query:<br><pre> $q </pre><br>Error:". mysqli_error());
 	
-	$myrow = mysql_fetch_array($result);
+	$myrow = mysqli_fetch_array($result);
 	
 	echo "<br>El m&eacute;dico <b>".$myrow["Nombre"]." ".$myrow["Ap_Paterno"]." ".$myrow["Ap_Materno"]."</b>, ha sido evaluado correctamente con la siguiente informaci�n:<br><br>";
 	
@@ -379,11 +379,11 @@ Case "Calificar":
 
 	break; //Termina "Calificar"
 
-	mysql_free_result($q);
+	mysqli_free_result($q);
 }	
 
 
-mysql_close($db);
+mysqli_close($connection);
 /*else
 	{ echo "No pasó"; }
 }*/

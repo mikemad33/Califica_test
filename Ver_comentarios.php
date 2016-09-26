@@ -37,12 +37,12 @@ getTwitters('tweet', {
 			where b.id_medico = $id_medico 
 			group by b.id_evaluacion order by b.Fecha_eval";
 	
-	$result = mysql_query($q,$db) 
-	or die("<br>Falló el query:<br><pre> $q </pre><br>Error:". mysql_error());
+	$result = mysqli_query($connection,$q) 
+	or die("<br>Falló el query:<br><pre> $q </pre><br>Error:". mysqli_error());
 
 	//echo "<br>".$q;
-	$num_rows = mysql_num_rows($result);
-	$myrow = mysql_fetch_array($result);
+	$num_rows = mysqli_num_rows($result);
+	$myrow = mysqli_fetch_array($result);
 
 	if (!empty($myrow)) 
 	{
@@ -79,7 +79,7 @@ echo $Nombre;
 			<td width='10%' height='40'>".number_format($myrow["Prom"],2)."</td>
     	  </tr>";
     
-   } while ($myrow = mysql_fetch_array($result));
+   } while ($myrow = mysqli_fetch_array($result));
 	}
    ?>
 </table>
